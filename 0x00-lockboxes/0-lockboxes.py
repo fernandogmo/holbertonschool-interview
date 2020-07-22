@@ -8,22 +8,20 @@ def canUnlockAll(boxes):
     opened, visited = 1, 0
     i, n = 0, len(boxes)
     while i < n:
-        box = boxes[i]
         flag = 2**i
         if (visited & flag) or not (opened & flag):
             i += 1
             continue
+        box = boxes[i]
         visited |= flag
-        if len(box):
-            for key in box:
-                if key < n:
-                    opened |= 2**key
-            j = min(box)
-            if j < i and not (visited & 2**j):
-                i = j
-                continue
+        for key in box:
+            if key < n:
+                opened |= 2**key
+            if key < i:
+                i = key
+        if not (visited & 2**i):
+            continue
         i += 1
-
     return opened == 2**n - 1
 
 
