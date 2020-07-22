@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+# Check if n locked boxes with keys inside can all be opened
+# starting only with the 0th box unlocked.
+# Solution uses bitflags for O(1) space complexity.
 
 
 def canUnlockAll(boxes):
@@ -13,10 +16,8 @@ def canUnlockAll(boxes):
         visited |= flag
         if len(box):
             for key in box:
-                if key > n - 1:
-                    continue
-                openbox = 2**key
-                opened |= openbox
+                if key < n:
+                    opened |= 2**key
             j = min(box)
             if j < i and not (visited & 2**j):
                 i = j
