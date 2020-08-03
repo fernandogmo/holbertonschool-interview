@@ -13,7 +13,9 @@ int main(void)
     listint_t *head;
 
     head = NULL;
+    printf("head = %p\n", (void *)head);
     add_nodeint_end(&head, 0);
+    printf("head = %p\n", (void *)head);
     add_nodeint_end(&head, 1);
     add_nodeint_end(&head, 2);
     add_nodeint_end(&head, 3);
@@ -23,14 +25,26 @@ int main(void)
     add_nodeint_end(&head, 1024);
     print_listint(head);
 
-    printf("-----------------\n");
+    printf("------- insert into beginning, middle, and end ----------\n");
 
+    printf("head = %p\n", (void *)head);
     insert_node(&head, -2);
+    printf("head = %p\n", (void *)head);
     insert_node(&head, 27);
-    insert_node(NULL, 42);
+    insert_node(NULL, 42); /* new list created, 16 bytes lost in 1 block */
     insert_node(&head, 27);
     insert_node(&head, 1025);
 
+    print_listint(head);
+
+    free_listint(head);
+
+    printf("------- insert into empty linked list -------------------\n");
+
+    head = NULL;
+    printf("head = %p\n", (void *)head);
+    add_nodeint_end(&head, 42);
+    printf("head = %p\n", (void *)head);
     print_listint(head);
 
     free_listint(head);
