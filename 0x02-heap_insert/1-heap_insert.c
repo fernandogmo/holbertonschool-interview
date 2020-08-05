@@ -33,9 +33,21 @@ heap_t *heap_insert(heap_t **root, int value)
 		if (!h->left)
 		{
 			new = binary_tree_node(h->parent, value);
+			swap_node(&new->left, &h->left);
+			swap_node(&new->right, &h->right);
 			new->left = h;
 			if (!h->parent)
 				*root = h->parent = new;
+			else if (h->parent->left == h)
+			{
+				h->parent->left = new;
+				h->parent = new;
+			}
+			else
+			{
+				h->parent->right = new;
+				h->parent = new;
+			}
 		}
 		else if (!h->right)
 		{
@@ -45,7 +57,6 @@ heap_t *heap_insert(heap_t **root, int value)
 			new->right = h;
 			if (!h->parent)
 				*root = h->parent = new;
-			/* new = heap_insert(&h->parent, value); */
 			else if (h->parent->left == h)
 			{
 				h->parent->left = new;
