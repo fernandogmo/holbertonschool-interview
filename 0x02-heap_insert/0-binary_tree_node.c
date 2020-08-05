@@ -1,6 +1,4 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 #include "binary_trees.h"
 
@@ -18,16 +16,7 @@ binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
 		return (NULL);
 	new->n = value;
 	new->parent = parent;
+	new->left = new->right = NULL;
 
 	return (new);
-}
-
-/**
- *
- */
-heap_t *heap_insert(heap_t **root, int value)
-{
-	heap_t *new = NULL;
-
-	return (new = binary_tree_node(*root, value));
 }
