@@ -29,8 +29,3 @@ def minOperations(n):
             return q + minOperations(d)
         d -= 1
     return 0
-
-
-if __name__ == '__main__':
-    for i in range(50, 101):
-        print("min ops for {} is {}".format(i, minOperations(i)))
