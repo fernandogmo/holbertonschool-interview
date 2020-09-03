@@ -18,9 +18,12 @@ if __name__ == "__main__":
     codes = OrderedDict((k, 0) for k in CODES)
     try:
         for line in sys.stdin:
-            status, size = map(int, line.split()[-2:])
-            codes[status] += 1
-            total_size += size
+            try:
+                status, size = map(int, line.split()[-2:])
+                codes[status] += 1
+                total_size += size
+            except Exception:
+                continue
             line_count += 1
             if line_count % 10 == 0:
                 print_log(total_size, codes)
