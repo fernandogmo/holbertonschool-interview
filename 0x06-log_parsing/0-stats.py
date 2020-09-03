@@ -8,19 +8,21 @@ def print_log(size, codes):
     ''' Prints computed metrics '''
     print("File size: {}".format(size))
     for k, v in codes.items():
-        if v != 0:
+        if k and v:
             print("{}: {}".format(k, v))
 
 
 if __name__ == "__main__":
     line_count = total_size = 0
-    CODES = [200, 301, 400, 401, 403, 404, 405, 500]
+    CODES = [200, 301, 400, 401, 403, 404, 405, 500, None]
     codes = OrderedDict((k, 0) for k in CODES)
     try:
         for line in sys.stdin:
             try:
-                codes[int(line.split()[-2])] += 1
-            except (IndexError, ValueError):
+                status = line.split()[-2]
+                status = int(status) if status.isdigit() else None
+                codes[status] += 1
+            except IndexError:
                 pass
             size = line.split()[-1]
             total_size += int(size) if size.isdigit() else 0
