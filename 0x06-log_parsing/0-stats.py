@@ -19,8 +19,7 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             status, size = map(int, line.split()[-2:])
-            if status in codes:
-                codes[status] += 1
+            codes[status] += 1
             total_size += size
             line_count += 1
             if line_count % 10 == 0:
