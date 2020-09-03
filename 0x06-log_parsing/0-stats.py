@@ -20,7 +20,7 @@ if __name__ == "__main__":
         for line in sys.stdin:
             try:
                 codes[int(line.split()[-2])] += 1
-            except ValueError:
+            except (IndexError, ValueError, KeyError):
                 pass
             try:
                 total_size += int(line.split()[-1])
