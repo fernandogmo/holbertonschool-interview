@@ -24,7 +24,7 @@ if __name__ == "__main__":
                 pass
             try:
                 total_size += int(line.split()[-1])
-            except IndexError:
+            except ValueError:
                 pass
             line_count += 1
             if line_count % 10 == 0:
