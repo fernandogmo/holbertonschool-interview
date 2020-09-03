@@ -18,10 +18,11 @@ if __name__ == "__main__":
     codes = OrderedDict((k, 0) for k in CODES)
     try:
         for line in sys.stdin:
-            status = line.split()[-2] if len(line) > 1 else ''
+            tokens = line.split()
+            status = tokens[-2] if len(tokens) > 1 else ''
             status = int(status) if status.isdigit() else None
             codes[status] += 1
-            size = line.split()[-1]
+            size = tokens[-1]
             total_size += int(size) if size.isdigit() else 0
             line_count += 1
             if line_count % 10 == 0:
