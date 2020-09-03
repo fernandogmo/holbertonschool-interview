@@ -23,7 +23,7 @@ if __name__ == "__main__":
                 codes[status] += 1
                 total_size += size
             except Exception:
-                continue
+                pass
             line_count += 1
             if line_count % 10 == 0:
                 print_log(total_size, codes)
