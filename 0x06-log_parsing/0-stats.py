@@ -22,10 +22,8 @@ if __name__ == "__main__":
                 codes[int(line.split()[-2])] += 1
             except (IndexError, ValueError):
                 pass
-            try:
-                total_size += int(line.split()[-1])
-            except ValueError:
-                pass
+            size = line.split()[-1]
+            total_size += int(size) if size.isdigit() else 0
             line_count += 1
             if line_count % 10 == 0:
                 print_log(total_size, codes)
