@@ -24,5 +24,6 @@ if __name__ == "__main__":
             line_count += 1
             if line_count % 10 == 0:
                 print_log(total_size, codes)
-    finally:
+        print_log(total_size, codes)
+    except KeyboardInterrupt:
         print_log(total_size, codes)
