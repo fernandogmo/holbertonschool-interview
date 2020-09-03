@@ -6,6 +6,8 @@ from collections import OrderedDict
 
 def print_log(size, codes):
     ''' Prints computed metrics '''
+    if size == 0:
+        exit(0)
     print("File size: {}".format(size))
     for k, v in codes.items():
         if v != 0:
