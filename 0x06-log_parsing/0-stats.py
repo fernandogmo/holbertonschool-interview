@@ -14,15 +14,15 @@ def print_log(size, codes):
 
 if __name__ == "__main__":
     line_count = total_size = 0
-    CODES = map(str, [200, 301, 400, 401, 403, 404, 405, 500])
+    CODES = [200, 301, 400, 401, 403, 404, 405, 500]
     codes = OrderedDict((k, 0) for k in CODES)
     try:
         for line in sys.stdin:
-            codes[line.split()[-2]] += 1
             try:
-                total_size += int(line.split()[-1])
+                codes[int(line.split()[-2])] += 1
             except Exception:
                 pass
+            total_size += int(line.split()[-1])
             line_count += 1
             if line_count % 10 == 0:
                 print_log(total_size, codes)
