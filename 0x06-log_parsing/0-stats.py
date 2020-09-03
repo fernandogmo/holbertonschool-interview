@@ -18,13 +18,12 @@ if __name__ == "__main__":
     codes = OrderedDict((k, 0) for k in CODES)
     try:
         for line in sys.stdin:
-            status, size = line.split()[-2:]
             try:
-                codes[int(status)] += 1
+                codes[int(line.split()[-2])] += 1
             except Exception:
                 pass
             try:
-                total_size += int(size)
+                total_size += int(line.split()[-1])
             except Exception:
                 pass
             line_count += 1
