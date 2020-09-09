@@ -8,13 +8,13 @@
  */
 int check_cycle(listint_t *head)
 {
-	listint_t *a = head, *b = head->next;
+	listint_t *fast = head, *slow = head;
 
-	while (b->next)
+	while (fast && fast->next)
 	{
-		a = a->next;
-		b = b->next->next;
-		if (a == b)
+		slow = slow->next;
+		fast = fast->next->next;
+		if (slow == fast)
 			return (1);
 	}
 	return (0);
