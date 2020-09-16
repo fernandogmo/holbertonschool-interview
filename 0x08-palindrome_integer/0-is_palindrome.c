@@ -8,23 +8,18 @@
 int is_palindrome(unsigned long n)
 {
 	divmod_t qr;
-	unsigned long i = 0, y = 0, x = n;
+	unsigned long rev = 0, x = n;
 
 	if (n < 10)
 		return (1);
 
-	while (x && ++i)
+	while (x)
 	{
 		divmod(x, 10, &qr);
-		y = (y * 10) + qr.r;
+		rev = (rev * 10) + qr.r;
 		x = qr.q;
 	}
-	while (--i && (n % 10) == (y % 10))
-	{
-		n /= 10;
-		y /= 10;
-	}
-	return (i == 0);
+	return (n == rev);
 }
 
 /**
