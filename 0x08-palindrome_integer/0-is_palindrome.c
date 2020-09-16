@@ -1,48 +1,40 @@
-int nth(unsigned digit, unsigned long n)
-{
-	unsigned i = 1;
+#include "palindrome.h"
 
-	while (digit-- > 0)
-		i *= 10;
-	if (n < i) /* has bugs! (but works for my usecase) */
-		return (n);
-	return ((n / i) % 10);
-}
-
+/**
+ * is_palindrome - checks is unsigned long is a palindrome
+ * @n: unsigned long integer to check
+ * Return: 1 if palindrome else 0
+ */
 int is_palindrome(unsigned long n)
 {
-	/* 0, 11, 121, 1221 */
-	/* 12, 123, 1231, 1234 */
+	divmod_t qr;
+	unsigned long i = 0, y = 0, x = n;
 
-	unsigned sum, count, back, odd, m = n;
-
-	sum = count = back = odd = 0;
-	if (n > 10)
-	{
-		while (n)
-		{
-			sum += n % 10;
-			count += 1;
-			n /= 10;
-		}
-		back = count / 2;
-		odd = count % 2;
-		/* 1 + 2 + (3) != 4 + 5 */
-		while (--count > back)
-		{
-			n += nth(count, m);
-
-		}
-		sum -= n;
-		if (odd)
-			sum -= nth(count, m);
-		return (sum == n);
-	}
-	else
+	if (n < 10)
 		return (1);
+
+	while (x && ++i)
+	{
+		divmod(x, 10, &qr);
+		y = (y * 10) + qr.r;
+		x = qr.q;
+	}
+	while (--i && (n % 10) == (y % 10))
+	{
+		n /= 10;
+		y /= 10;
+	}
+	return (i == 0);
 }
 
-int main(void)
+/**
+ * divmod - updates @qr with the quotient and remainder of @n and @d
+ * @n: unsigned long dividend.
+ * @d: unsigned int divisor.
+ * @qr: pointer to divmod_t to update with values.
+ */
+void divmod(unsigned long n, unsigned int d, divmod_t *qr)
 {
-	return (is_palindrome(1221));
+	qr->q = n / d;
+	qr->r = n - (qr->q * 10);
 }
