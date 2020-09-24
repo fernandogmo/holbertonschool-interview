@@ -5,40 +5,20 @@ A method that determines if a given data set represents a valid UTF-8 encoding
 
 
 def validUTF8(data):
-    data = iter(data)
-    mask = int('0b11111111', 2)
-    try:
-        for n in data:
-            n &= mask
-            if int('0x00', 16) <= n <= int('0x7f', 16):
-                continue
-            if int('0xc2', 16) <= n <= int('0xdf', 16):
-                n1 = next(data) & mask
-                if int('0x80', 16) <= n1 <= int('0xbf', 16):
-                    continue
-                else:
-                    return False
-            elif int('0xe0', 16) <= n <= int('0xef', 16):
-                n1 = next(data) & mask
-                n2 = next(data) & mask
-                if int('0xa0', 16) <= n1 <= int('0xbf', 16) and \
-                        int('0x80', 16) <= n2 <= int('0xbf', 16):
-                    continue
-                else:
-                    return False
-            elif int('0xf0', 16) <= n <= int('0xf4', 16):
-                n1 = next(data) & mask
-                n2 = next(data) & mask
-                n3 = next(data) & mask
-                if int('0x90', 16) <= n1 <= int('0x8f', 16) and \
-                        int('0x80', 16) <= n2 <= int('0xbf', 16) and \
-                        int('0x80', 16) <= n3 <= int('0xbf', 16):
-                    continue
-                else:
-                    return False
-    except StopIteration:
-        return False
-    return True
+    bit_count = 0
+    for n in data:
+        mask = 1 << 7
+        if not bit_count:
+            while n & mask:
+                bit_count += 1
+                mask >>= 1
+            if bit_count > 4:
+                return False
+        elif n >> 6 != 2:
+            return False
+        if bit_count:
+            bit_count -= 1
+    return bit_count == 0
 
 
 if __name__ == "__main__":
