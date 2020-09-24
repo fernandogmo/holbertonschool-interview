@@ -11,7 +11,7 @@ def validUTF8(data):
         n &= mask
         if int('0x00', 16) <= n <= int('0x7f', 16):
             continue
-        if n < int('0b11100000', 2):
+        if int('0b11000010', 2) <= n < int('0b11100000', 2):
             n1 = next(data) & mask
             if int('0b01111111', 2) < n1 < int('0b11000000', 2):
                 continue
