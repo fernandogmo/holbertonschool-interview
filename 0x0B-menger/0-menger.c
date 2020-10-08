@@ -1,5 +1,10 @@
 #include "menger.h"
 
+
+/**
+ * menger - draws a 2D Menger Sponge, AKA a Sierpinksi Carpet
+ * @level: how many levels of Menger sponge to be drawn
+ */
 void menger(int level)
 {
 	int row, col, r, c;
