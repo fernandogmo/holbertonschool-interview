@@ -1,34 +1,26 @@
 #include "menger.h"
 
-
 /**
  * menger - draws a 2D Menger Sponge, AKA a Sierpinksi Carpet
  * @level: how many levels of Menger sponge to be drawn
  */
 void menger(int level)
 {
-	int row, col, r, c;
-	int size = pow(3, level);
-	char x;
+	int i, j, n, size = pow(3, level);
+	char x = -1;
 
-	if (level < 0)
-		return;
-	for (row = 0; row < size; ++row)
+	for (i = 0; i < size; ++i)
 	{
-		for (col = 0; col < size; ++col)
+		for (j = 0; j < size; ++j)
 		{
-			x = '#';
-			for (r = row, c = col; r || c; r /= 3, c /= 3)
-			{
-				if (r % 3 == 1 && c % 3 == 1)
-				{
-					x = ' ';
+			for (n = size / 3; n; n /= 3)
+				if (((i % (n * 3)) / n == 1) &&
+				    ((j % (n * 3)) / n == 1))
 					break;
-				}
-			}
-			putchar(x);
+			if (!n) for (++x; x > 25; x %= 26);
+			putchar(n ? ' ' : (x + 65));
+			putchar(n ? ' ' : (++x + 65));
 		}
 		putchar('\n');
 	}
-
 }
