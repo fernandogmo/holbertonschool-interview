@@ -29,9 +29,9 @@ int slide_left(int *line, size_t size)
 
 	for (; j < size; curr = line[++j])
 		if (curr != 0)
-			last	=	last == 0	? curr
-				:	last == curr	? (line[i++] = last * 2, 0)
-				:			  (line[i++] = last, curr);
+			last	= last == 0	? curr
+				: last == curr	? (line[i++] = last * 2, 0)
+				:		  (line[i++] = last, curr);
 
 	if (last)
 		line[i++] = last;
