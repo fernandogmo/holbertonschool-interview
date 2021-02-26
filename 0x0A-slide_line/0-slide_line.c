@@ -32,12 +32,12 @@ int slide_left(int *line, size_t size)
 			last	= last == 0	? curr
 				: last == curr	? (line[i++] = last * 2, 0)
 				:		  (line[i++] = last, curr);
-
 	if (last)
 		line[i++] = last;
 
 	for (; i < size; ++i)
 		line[i] = 0;
+
 	return (1);
 }
 
@@ -55,25 +55,14 @@ int slide_right(int *line, size_t size)
 
 	for (; j >= 0; curr = line[--j])
 		if (curr != 0)
-		{
-			if (!last)
-				last = curr;
-			else if (last == curr)
-			{
-				line[i--] = last * 2;
-				last = 0;
-			}
-			else
-			{
-				line[i--] = last;
-				last = curr;
-			}
-		}
-
+			last	= last == 0	? curr
+				: last == curr	? (line[i--] = last * 2, 0)
+				:		  (line[i--] = last, curr);
 	if (last)
 		line[i--] = last;
 
 	for (; i >= 0; --i)
 		line[i] = 0;
+
 	return (1);
 }
