@@ -20,9 +20,9 @@ def n_queens(n, row, result):
         print(result)
     else:
         for col in range(n):
-            if all(q[1] != col and
-                   q[0] + q[1] != row + col and
-                   q[0] - q[1] != row - col for q in result):
+            if all(c != col and
+                   r + c != row + col and
+                   r - c != row - col for r, c in result):
                 result.append([row, col])
                 n_queens(n, row + 1, result)
                 result.remove([row, col])
