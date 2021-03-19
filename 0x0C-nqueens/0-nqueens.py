@@ -14,6 +14,30 @@ fernando@ubuntu:~$ ./0-nqueens.py 6
 """
 import sys
 
+
+def is_valid(result, pos):
+    for queen in result:
+        if queen[1] == pos[1]:
+            return False
+        if (queen[0] + queen[1]) == (pos[0] + pos[1]):
+            return False
+        if (queen[0] - queen[1]) == (pos[0] - pos[1]):
+            return False
+    return True
+
+
+def n_queens(n, row, result):
+    if (row == n):
+        print(result)
+    else:
+        for col in range(n):
+            pos = [row, col]
+            if is_valid(result, pos):
+                result.append(pos)
+                n_queens(n, row + 1, result)
+                result.remove(pos)
+
+
 if __name__ == "__main__":
     try:
         n = int(sys.argv[1])
@@ -28,4 +52,5 @@ if __name__ == "__main__":
             print("N must be at least 4")
             exit(1)
         else:
-            print(f"n = {n}")
+            result = []
+            n_queens(n, 0, result)
