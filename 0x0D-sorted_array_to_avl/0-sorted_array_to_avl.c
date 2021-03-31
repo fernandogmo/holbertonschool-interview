@@ -10,8 +10,8 @@ static inline avl_t *avl_node(avl_t *parent, int value)
 {
 	avl_t *node = malloc(sizeof(*node));
 
-	if (!node)
-		return (NULL);
+	if (node == NULL)
+		exit(12); /* ENOMEM */
 	node->n = value;
 	node->left = node->right = NULL;
 	node->parent = parent;
