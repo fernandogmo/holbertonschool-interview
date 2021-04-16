@@ -15,28 +15,22 @@ Requirements:
 
 def rain(walls):
     """ See module description """
-    assert(all(map(lambda x: x >= 0, walls)))
-    volume = width = 0
-    prev_wall = 0
+    assert all(map(lambda x: x >= 0, walls))
+    volume = width = prev_wall = 0
     for wall in walls:
-        print(f"{wall=}: {prev_wall=}, {width=}")
-        if wall == 0 and prev_wall:
+        if prev_wall and wall == 0:
             width += 1
-            print(f"{wall=}: {prev_wall=}, {width=}")
-            print(f"{volume=} --------------------")
             continue
         if prev_wall:
             volume += width * min(prev_wall, wall)
             width = 0
         prev_wall = wall
-
-        print(f"{wall=}: {prev_wall=}, {width=}")
-        print(f"{volume=} --------------------")
-    print(volume)
     return volume
 
 
 if __name__ == "__main__":
-    walls = [0, 1, 0, 2, 0, 3, 0, 4]
-    print(walls)
-    assert(rain(walls) == 6)
+    cases = [(6, [0, 1, 0, 2, 0, 3, 0, 4]),
+             (0, [])]
+    for volume, walls in cases:
+        assert rain(walls) == volume, \
+               "case {} failed with volume {}".format(walls, rain(walls))
