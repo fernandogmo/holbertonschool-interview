@@ -16,21 +16,30 @@ Requirements:
 def rain(walls):
     """ See module description """
     assert all(map(lambda x: x >= 0, walls))
-    volume = width = prev_wall = 0
-    for wall in walls:
-        if prev_wall and wall == 0:
-            width += 1
-            continue
-        if prev_wall:
-            volume += width * min(prev_wall, wall)
-            width = 0
-        prev_wall = wall
+    right = len(walls) - 1
+    volume = left = leftmax = rightmax = 0
+    while left < right:
+        if walls[left] < walls[right]:
+            if walls[left] >= leftmax:
+                leftmax = walls[left]
+            else:
+                volume += leftmax - walls[left]
+            left += 1
+        else:
+            if walls[right] >= rightmax:
+                rightmax = walls[right]
+            else:
+                volume += rightmax - walls[right]
+            right -= 1
     return volume
 
 
 if __name__ == "__main__":
-    cases = [(6, [0, 1, 0, 2, 0, 3, 0, 4]),
-             (0, [])]
+    cases = [(0, []),
+             (2, [3, 1, 3]),
+             (1, [2, 3, 1, 2, 2]),
+             (6, [0, 4, 0, 3, 0, 2, 0, 1]),
+             (6, [0, 1, 0, 2, 0, 3, 0, 4])]
     for volume, walls in cases:
         assert rain(walls) == volume, \
                "case {} failed with volume {}".format(walls, rain(walls))
