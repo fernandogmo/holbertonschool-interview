@@ -7,8 +7,7 @@ void heap_sort(int *a, size_t n);
 void print_array(const int *a, size_t n);
 
 #define SWAP(a, b)                   \
-	do                           \
-	{                            \
+	do {                         \
 		const int tmp = (a); \
 		(a) = (b);           \
 		(b) = tmp;           \
