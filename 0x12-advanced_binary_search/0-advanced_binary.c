@@ -24,7 +24,7 @@ int advanced_binary(int *array, size_t sz, int v)
 		printf("%d\n", array[i]);
 
 		if (array[m] == v)
-			return ((array[m - 1] == v)
+			return ((m > 0 && array[m - 1] == v)
 				? advanced_binary(array, SZ_NEW_U, v)
 				: (int)(m + RESET_STATICS));
 		else if (array[m] < v)
