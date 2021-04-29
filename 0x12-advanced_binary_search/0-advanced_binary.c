@@ -2,7 +2,7 @@
 #include "search_algos.h"
 
 /**
- * binary_search - searches for a value in an array of ints
+ * advanced_binary - searches for a value in an array of ints
  * @array: ptr to the first element of the array to search
  * @sz: number of elements in @array
  * @v: value to find in @array
