@@ -6,11 +6,11 @@
  * *	     at least as small as its parent's value (or we reach the root)
  * @a: heap_t pointer to one-indexed heap array (a[0] == NULL)
  * @len: size_t length of heap array (NOTE: not its capacity)
- * @last: heap_t pointer to a[len], for convenience
  * Return: heap_t pointer to node we've sifted up
  */
-static inline heap_t *sift_up(heap_t **a, size_t len, heap_t *last)
+static inline heap_t *sift_up(heap_t **a, size_t len)
 {
+	heap_t *last = a[len];
 	size_t parent = len / 2;
 	while (a[parent] && a[parent]->n < last->n)
 	{
@@ -38,5 +38,5 @@ heap_t *heap_insert(heap_t **root, int value)
 	harray[++hlen] = (!parent->left)
 			? (parent->left = binary_tree_node(parent, value))
 			: (parent->right = binary_tree_node(parent, value));
-	return (sift_up((heap_t **)&harray, hlen, harray[hlen]));
+	return (sift_up((heap_t **)&harray, hlen));
 );}
