@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "binary_trees.h"
 
@@ -9,14 +10,9 @@
  * Return: pointer to new node or NULL on failure
  */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
-{
-	binary_tree_t *new = malloc(sizeof(*new));
-
-	if (!new)
-		return (NULL);
-	new->n = value;
-	new->parent = parent;
-	new->left = new->right = NULL;
-
-	return (new);
-}
+{C99(
+	binary_tree_t src = (binary_tree_t){value, parent, NULL, NULL};
+	binary_tree_t *dst = calloc(1, sizeof(*dst));
+	if (!dst) return (NULL);
+	return (memcpy(dst, &src, sizeof(src)));
+);}

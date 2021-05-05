@@ -25,4 +25,21 @@ void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
 
+#define SWAP(a, b)                   \
+	do {                         \
+		const int tmp = (a); \
+		(a) = (b);           \
+		(b) = tmp;           \
+	} while (0)
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wvariadic-macros"
+#define C99(...) \
+do { \
+_Pragma("GCC diagnostic push")\
+_Pragma("GCC diagnostic ignored \"-Wpedantic\"")\
+	__VA_ARGS__ \
+_Pragma("GCC diagnostic pop")\
+} while (0)
+
 #endif /* _BINARY_TREES_H_ */
