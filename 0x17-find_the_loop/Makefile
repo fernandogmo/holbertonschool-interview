@@ -6,8 +6,10 @@
 0 : 0-main.c 0-find_loop.c
 ARGS_0 :=
 BENCH_0 :=
+1 : 1-main.c 0-find_loop.c
+5 : 5-main.c 0-find_loop.c
 
-TARGET ?= 0
+TARGET ?= 5
 TESTARGS ?= $(ARGS_$<)
 test: $(TARGET)
 	@$(CC) --version | head -1 1> >(sed $$'s,.*,${BLUE}&${NC},' >&1)

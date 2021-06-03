@@ -1,6 +1,5 @@
 #include "lists.h"
 
-
 /**
  * find_listint_loop - finds start of loop in singly-linked list
  * @head: listint_t pointer
@@ -8,8 +7,21 @@
  */
 listint_t *find_listint_loop(listint_t *head)
 {
-	for (; head; head = head->next)
-		if ((head - head->next) <= 0)
-			return (head->next);
+	listint_t *fast, *slow;
+	for (fast = slow = head; fast && fast->next;)
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+		if (fast == slow)
+		{
+			slow = head;
+			while (fast != slow)
+			{
+				fast = fast->next;
+				slow = slow->next;
+			}
+			return (slow);
+		}
+	}
 	return (NULL);
 }
