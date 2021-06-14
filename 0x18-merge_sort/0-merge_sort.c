@@ -5,11 +5,11 @@
  * @array: int array of integers.
  * @size: size_t length of array.
  * @m: size_t midpoint of array.
+ * @tmp: int array for temporarily holding sorted values.
  */
-void merge(int *array, size_t size, size_t m)
+void merge(int *array, size_t size, size_t m, int *tmp)
 {
 	size_t i = 0, j = m, k = 0;
-	int *tmp = malloc(size * sizeof(*array));
 
 	printf("Merging...\n");
 	printf("[left]: "), print_array(array, m);
@@ -28,7 +28,6 @@ void merge(int *array, size_t size, size_t m)
 		array[i] = tmp[i];
 
 	printf("[Done]: "), print_array(array, size);
-	free(tmp);
 }
 
 /**
@@ -41,10 +40,11 @@ void merge_sort(int *array, size_t size)
 {
 	if (size > 1)
 	{
+		int tmp[BUFSIZ] = {0};
 		size_t m = size / 2;
 
 		merge_sort(array, m);
 		merge_sort(array + m, size - m);
-		merge(array, size, m);
+		merge(array, size, m, (int *)&tmp);
 	}
 }
