@@ -24,7 +24,6 @@ def makeChange(coins, total):
             if min_coins[cents - j] + 1 < num_coins:
                 num_coins = min_coins[cents - j] + 1
         min_coins[cents] = num_coins
-    print(min_coins)
     return min_coins[total]
 
 
@@ -32,25 +31,3 @@ if __name__ == '__main__':
     print(makeChange([1, 3, 4], 6))  # 2
     print(makeChange([1, 2, 25], 37))  # 7
     print(makeChange([1256, 54, 48, 16, 102], 1453))  # -1
-
-# %%
-
-
-def number_of_ways(coins, target):
-    # I get this part
-    if target == 0:
-        return 0
-
-    # This part I don't understand!
-    ways = [1] + [0] * target
-    for coin in coins:
-        for i in range(coin, target + 1):
-            ways[i] += ways[i - coin]
-    print(ways)
-    return ways[target]
-
-# m = [[0 for _ in range(n + 1)] for _ in range(len(coins) + 1)]
-# for i in range(1, n + 1):
-#     m[0][i] = float('inf')  # By default there is no way of making change
-
-# %%
