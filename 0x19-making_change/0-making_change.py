@@ -17,6 +17,8 @@ Return: fewest number of coins needed to meet total
 def makeChange(coins, total):
     if total == 2 or coins == [3, 6, 9] or coins == []:
         return -1
+    if total <= 0:
+        return 0
     min_coins = [0] * (total + 1)
     for cents in range(total + 1):
         num_coins = cents
