@@ -9,11 +9,11 @@
  */
 static List *node_create(char *str)
 {
-	List src = (List){strdup(str), NULL, NULL};
-	List *dst = calloc(1, sizeof(*dst));
-	if (!src.str) return (NULL);
-	if (!dst) {free(dst); return (NULL);}
-	return (memcpy(dst, &src, sizeof(src)));
+	List *new = malloc(sizeof(*new));
+	if (!new) return (NULL);
+	new->str = strdup(str);
+	if (!new->str) {free(new); return (NULL);}
+	return (new);
 }
 
 /**
